@@ -329,9 +329,28 @@ export function Header() {
 
               {/* CTA */}
               <div
-                className="hidden lg:block"
+                className="hidden items-center gap-5 lg:flex"
                 onMouseEnter={() => setActiveMenu(null)}
               >
+                <Link
+                  href="/member/login"
+                  className={`
+                    text-[9px]
+                    font-bold
+                    uppercase
+                    tracking-[0.1em]
+                    transition-colors
+
+                    ${
+                      megaMenuOpen
+                        ? "text-black/50 hover:text-black"
+                        : "text-white/55 hover:text-white"
+                    }
+                  `}
+                >
+                  Members
+                </Link>
+
                 <Link
                   href="#membership"
                   className="
@@ -647,6 +666,32 @@ export function Header() {
                   06:00 – 20:00
                 </div>
               </div>
+
+              <Link
+                href="/member/login"
+                onClick={() =>
+                  setMenuOpen(false)
+                }
+                className="
+                  mt-6
+                  flex
+                  h-12
+                  items-center
+                  justify-between
+                  border
+                  border-white/15
+                  px-5
+                  text-[10px]
+                  font-black
+                  uppercase
+                  tracking-[0.1em]
+                  text-white/70
+                "
+              >
+                Member Login
+
+                <ArrowUpRight className="size-4" />
+              </Link>
 
               <Link
                 href="#membership"

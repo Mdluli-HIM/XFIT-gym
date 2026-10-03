@@ -265,3 +265,29 @@ html.lenis body {
     animation: none !important;
   }
 }
+
+/* ========================================
+   XFIT MEMBER ACCESS SCANNER
+   ======================================== */
+
+.scanner-line {
+  animation: xfitScannerLine 2s ease-in-out infinite;
+}
+
+@keyframes xfitScannerLine {
+  0%,
+  100% {
+    top: 22%;
+  }
+
+  50% {
+    top: 76%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scanner-line {
+    animation: none !important;
+    top: 50%;
+  }
+}
