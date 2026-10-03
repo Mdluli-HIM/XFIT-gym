@@ -1,26 +1,267 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+@theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --color-background: #0a0a0a;
+  --color-foreground: #f5f5f5;
+
+  --color-surface: #111111;
+  --color-surface-light: #181818;
+
+  --color-muted: #979797;
+  --color-border: rgba(255, 255, 255, 0.12);
+
+  --breakpoint-xs: 30rem;
+  --breakpoint-3xl: 120rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #0a0a0a;
+  --foreground: #f5f5f5;
+
+  --surface: #111111;
+  --surface-light: #181818;
+
+  --muted: #979797;
+  --border: rgba(255, 255, 255, 0.12);
+
+  --container-width: 1440px;
+
+  --section-space: clamp(5rem, 9vw, 9rem);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--background);
+  scroll-behavior: auto;
 }
 
 body {
+  margin: 0;
+  overflow-x: clip;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body,
+button,
+a,
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+img,
+video,
+canvas,
+svg {
+  display: block;
+}
+
+::selection {
+  background: #f5f5f5;
+  color: #0a0a0a;
+}
+
+.site-section {
+  padding-block: var(--section-space);
+}
+
+/* Prevent layout jumps caused by scroll locking */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ========================================
+   XFIT DISPLAY TYPOGRAPHY
+   ======================================== */
+
+.hero-display {
+  max-width: 9.2em;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-size: clamp(3.85rem, 17vw, 6rem);
+  font-weight: 900;
+  line-height: 0.77;
+  letter-spacing: -0.075em;
+  text-wrap: balance;
+}
+
+@media (min-width: 48rem) {
+  .hero-display {
+    max-width: 8.8em;
+    font-size: clamp(6rem, 12vw, 9rem);
+    line-height: 0.76;
+  }
+}
+
+@media (min-width: 64rem) {
+  .hero-display {
+    max-width: 8.5em;
+    font-size: clamp(7.5rem, 10.6vw, 10.5rem);
+    letter-spacing: -0.08em;
+  }
+}
+
+/* ========================================
+   HORIZONTAL EDITORIAL CARDS
+   ======================================== */
+
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* ========================================
+   JOIN XFIT RED / BLACK CTA
+   ======================================== */
+
+.join-cta-red {
+  box-shadow:
+    0 0 0 1px rgba(211, 19, 27, 0.22),
+    0 0 14px rgba(211, 19, 27, 0.18),
+    0 0 28px rgba(211, 19, 27, 0.12);
+  animation: joinCtaRedPulse 2.8s ease-in-out infinite;
+}
+
+.join-cta-red::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(211, 19, 27, 0.08) 35%,
+      rgba(255, 40, 40, 0.18) 50%,
+      rgba(211, 19, 27, 0.08) 65%,
+      transparent 100%
+    );
+  transform: translateX(-120%);
+  animation: joinCtaRedSweep 3.3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.join-cta-red::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid rgba(255, 54, 54, 0.35);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.join-cta-red:hover {
+  box-shadow:
+    0 0 0 1px rgba(255, 52, 52, 0.35),
+    0 0 18px rgba(211, 19, 27, 0.28),
+    0 0 42px rgba(211, 19, 27, 0.2),
+    0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+@keyframes joinCtaRedPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(211, 19, 27, 0.2),
+      0 0 12px rgba(211, 19, 27, 0.14),
+      0 0 24px rgba(211, 19, 27, 0.08);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(255, 52, 52, 0.32),
+      0 0 18px rgba(211, 19, 27, 0.24),
+      0 0 36px rgba(211, 19, 27, 0.16);
+  }
+}
+
+@keyframes joinCtaRedSweep {
+  0%,
+  58% {
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+
+  64% {
+    opacity: 1;
+  }
+
+  82% {
+    transform: translateX(120%);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .join-cta-red,
+  .join-cta-red::before,
+  .join-cta-red::after {
+    animation: none !important;
+  }
 }
