@@ -7,6 +7,7 @@ import { ArrowDown, ArrowUpRight } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
 import { company } from "@/data/company";
+import { sectionLinks } from "@/data/navigation";
 
 const reveal = {
   hidden: {
@@ -207,7 +208,7 @@ export function Hero() {
                 className="relative z-[5] md:mr-[17%]"
               >
                 <Link
-                  href="#membership"
+                  href={sectionLinks.membership.href}
                   className="group inline-flex items-center gap-3 border-b border-white/50 pb-2 text-[10px] font-bold uppercase tracking-[0.12em] transition-colors hover:border-white"
                 >
                   Join XFIT
@@ -238,7 +239,7 @@ export function Hero() {
           </div>
 
           <Link
-            href="#gym"
+            href={sectionLinks.gym.href}
             aria-label="Scroll to explore XFIT"
             className="
               group

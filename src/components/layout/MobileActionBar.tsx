@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight, Phone } from "lucide-react";
 
 import { company } from "@/data/company";
+import { sectionLinks } from "@/data/navigation";
 
 /**
  * Always-visible "Join XFIT" + "Call" bar for phones and tablets.
@@ -40,7 +41,7 @@ export function MobileActionBar() {
       >
         <div className="mx-auto grid h-[4.5rem] max-w-xl grid-cols-[1.4fr_1fr] items-center gap-2">
           <Link
-            href="#membership"
+            href={sectionLinks.membership.href}
             className="
               flex
               h-12

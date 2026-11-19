@@ -18,6 +18,11 @@ import {
 
 import { Container } from "@/components/ui/Container";
 import { company } from "@/data/company";
+import {
+  memberLoginLink,
+  sectionLinks,
+  type NavLink,
+} from "@/data/navigation";
 
 type MenuKey = "gym" | "training" | "membership";
 
@@ -40,19 +45,19 @@ const megaMenus: Record<MenuKey, MegaMenu> = {
       {
         eyebrow: "Inside XFIT",
         title: "The Gym",
-        href: "#gym",
+        href: sectionLinks.gym.href,
         image: "/images/gym/gym-01.jpg",
       },
       {
         eyebrow: "Train together",
         title: "The People",
-        href: "#gym",
+        href: sectionLinks.gym.href,
         image: "/images/gym/gym-03.jpg",
       },
       {
         eyebrow: "Feel it",
         title: "The Energy",
-        href: "#gym",
+        href: sectionLinks.gym.href,
         image: "/images/gym/gym-02.jpg",
       },
     ],
@@ -64,19 +69,19 @@ const megaMenus: Record<MenuKey, MegaMenu> = {
       {
         eyebrow: "Build",
         title: "Strength",
-        href: "#workouts",
+        href: sectionLinks.workouts.href,
         image: "/images/gym/gym-01.jpg",
       },
       {
         eyebrow: "Move",
         title: "Cardio",
-        href: "#workouts",
+        href: sectionLinks.workouts.href,
         image: "/images/gym/gym-02.jpg",
       },
       {
         eyebrow: "Perform",
         title: "Functional",
-        href: "#workouts",
+        href: sectionLinks.workouts.href,
         image: "/images/gym/gym-03.jpg",
       },
     ],
@@ -88,49 +93,34 @@ const megaMenus: Record<MenuKey, MegaMenu> = {
       {
         eyebrow: "Get started",
         title: "Memberships",
-        href: "#membership",
+        href: sectionLinks.membership.href,
         image: "/images/gym/gym-02.jpg",
       },
       {
         eyebrow: "Come through",
         title: "Visit XFIT",
-        href: "#contact",
+        href: sectionLinks.contact.href,
         image: "/images/gym/gym-01.jpg",
       },
       {
         eyebrow: "Need help?",
         title: "Talk to us",
-        href: "#contact",
+        href: sectionLinks.contact.href,
         image: "/images/gym/gym-03.jpg",
       },
     ],
   },
 };
 
-const desktopLinks = [
-  {
-    label: "About",
-    href: "#about",
-  },
-  {
-    label: "Gym",
-    href: "#gym",
-    menu: "gym" as MenuKey,
-  },
-  {
-    label: "Training",
-    href: "#training",
-    menu: "training" as MenuKey,
-  },
-  {
-    label: "Membership",
-    href: "#membership",
-    menu: "membership" as MenuKey,
-  },
-  {
-    label: "Contact",
-    href: "#contact",
-  },
+// Header + phone menu links (from data/navigation.ts). `menu` opens a
+// desktop mega menu on hover/focus.
+const desktopLinks: (NavLink & { menu?: MenuKey })[] = [
+  sectionLinks.about,
+  { ...sectionLinks.gym, menu: "gym" },
+  { ...sectionLinks.training, menu: "training" },
+  sectionLinks.trainers,
+  { ...sectionLinks.membership, menu: "membership" },
+  sectionLinks.contact,
 ];
 
 export function Header() {
@@ -406,7 +396,7 @@ export function Header() {
                 onMouseEnter={() => setActiveMenu(null)}
               >
                 <Link
-                  href="/member/login"
+                  href={memberLoginLink.href}
                   className={`
                     text-[9px]
                     font-bold
@@ -425,7 +415,7 @@ export function Header() {
                 </Link>
 
                 <Link
-                  href="#membership"
+                  href={sectionLinks.membership.href}
                   className="
                     join-cta-red
                     group
@@ -528,13 +518,7 @@ export function Header() {
                   </p>
 
                   <Link
-                    href={
-                      activeMenu === "gym"
-                        ? "#gym"
-                        : activeMenu === "training"
-                          ? "#training"
-                          : "#membership"
-                    }
+                    href={sectionLinks[activeMenu].href}
                     className="group flex items-center gap-2 text-[8px] font-bold uppercase tracking-[0.12em] text-black/45 transition-colors hover:text-black"
                   >
                     View all
@@ -735,9 +719,9 @@ export function Header() {
                       onClick={() =>
                         setMenuOpen(false)
                       }
-                      className="flex items-center justify-between py-4"
+                      className="flex items-center justify-between py-3"
                     >
-                      <span className="text-[clamp(2.35rem,12vw,4rem)] font-black uppercase leading-[0.88] tracking-[-0.065em]">
+                      <span className="text-[clamp(2.1rem,10.5vw,4rem)] font-black uppercase leading-[0.88] tracking-[-0.065em]">
                         {link.label}
                       </span>
 
@@ -764,59 +748,60 @@ export function Header() {
                 </div>
               </div>
 
-              <Link
-                href="/member/login"
-                onClick={() =>
-                  setMenuOpen(false)
-                }
-                className="
-                  mt-6
-                  flex
-                  h-12
-                  items-center
-                  justify-between
-                  border
-                  border-white/15
-                  px-5
-                  text-[10px]
-                  font-black
-                  uppercase
-                  tracking-[0.1em]
-                  text-white/70
-                "
-              >
-                Member Login
+              {/* Side by side so the whole menu fits on one phone screen */}
+              <div className="mt-6 grid grid-cols-2 gap-2">
+                <Link
+                  href={memberLoginLink.href}
+                  onClick={() =>
+                    setMenuOpen(false)
+                  }
+                  className="
+                    flex
+                    h-14
+                    items-center
+                    justify-between
+                    border
+                    border-white/15
+                    px-5
+                    text-[10px]
+                    font-black
+                    uppercase
+                    tracking-[0.1em]
+                    text-white/70
+                  "
+                >
+                  Member Login
 
-                <ArrowUpRight className="size-4" />
-              </Link>
+                  <ArrowUpRight className="size-4" />
+                </Link>
 
-              <Link
-                href="#membership"
-                onClick={() =>
-                  setMenuOpen(false)
-                }
-                className="
-                  mt-6
-                  flex
-                  h-14
-                  items-center
-                  justify-between
-                  border
-                  border-[#d3131b]
-                  bg-[#090909]
-                  px-5
-                  text-xs
-                  font-black
-                  uppercase
-                  tracking-[0.08em]
-                  text-[#ef2a2a]
-                  shadow-[0_0_20px_rgba(211,19,27,0.22)]
-                "
-              >
-                <span className="text-[#ef2a2a]">Join XFIT</span>
+                <Link
+                  href={sectionLinks.membership.href}
+                  onClick={() =>
+                    setMenuOpen(false)
+                  }
+                  className="
+                    flex
+                    h-14
+                    items-center
+                    justify-between
+                    border
+                    border-[#d3131b]
+                    bg-[#090909]
+                    px-5
+                    text-xs
+                    font-black
+                    uppercase
+                    tracking-[0.08em]
+                    text-[#ef2a2a]
+                    shadow-[0_0_20px_rgba(211,19,27,0.22)]
+                  "
+                >
+                  <span className="text-[#ef2a2a]">Join XFIT</span>
 
-                <ArrowUpRight className="size-4 text-[#ef2a2a]" />
-              </Link>
+                  <ArrowUpRight className="size-4 text-[#ef2a2a]" />
+                </Link>
+              </div>
             </div>
           </motion.div>
         )}
