@@ -24,12 +24,19 @@ This is an EXISTING Next.js 16 (App Router) + React 19 + TypeScript + Tailwind v
 - Address: B, 2946 Tambo St, Nkowankowa, 0870 (Limpopo)
 - Phone: 067 934 0400 (+27 67 934 0400)
 - Hours: closes 8pm. **Opening hours per day are still to be confirmed.** Don't invent hours or show
-  unconfirmed ones as fact.
+  unconfirmed ones as fact. The site shows "Closes 8pm" + "Full hours: to be confirmed" from the single
+  `hours` entry in `src/data/company.ts`.
 - Instagram: @xfitextremefitness
 - Memberships: Monthly **R300**, Weekly **R150**, Day pass **R30**
 - Payments: cash, Yoco card, EFT
 
 Keep these in `src/data/company.ts` and read them from there. Don't hard-code them in components.
+
+## Site URL / domain
+
+We do **not** own `xfit.co.za`; never use it. The site address comes from one setting,
+`src/lib/site-url.ts`: the `NEXT_PUBLIC_SITE_URL` environment variable (set it in Vercel once the real
+domain exists), falling back to Vercel's own URL, then `http://localhost:3000`.
 
 ## Rules
 
