@@ -3,6 +3,7 @@ import { Hero } from "@/components/sections/Hero";
 import { GymExperience } from "@/components/sections/GymExperience";
 import { TrainingApproach } from "@/components/sections/TrainingApproach";
 import { WorkoutOptions } from "@/components/sections/WorkoutOptions";
+import { MobileActionBar } from "@/components/layout/MobileActionBar";
 
 export default function Home() {
   return (
@@ -34,6 +35,9 @@ export default function Home() {
         className="min-h-screen bg-[#111111]"
         aria-label="Contact XFIT"
       />
+
+      {/* Keep last: sticky Join / Call bar on phones */}
+      <MobileActionBar />
     </main>
   );
 }

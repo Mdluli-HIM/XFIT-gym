@@ -7,7 +7,8 @@ export const company = {
 
   contact: {
     phone: "+27679340400",
-    displayPhone: "+27 67 934 0400",
+    displayPhone: "067 934 0400",
+    telHref: "tel:0679340400",
   },
 
   address: {

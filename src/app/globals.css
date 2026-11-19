@@ -50,6 +50,12 @@ body {
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* The layout uses viewport-fit=cover (for the phone action bar's
+     bottom safe area). Keep page content clear of the notch when an
+     iPhone is held sideways; these are 0 everywhere else. */
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
 }
 
 body,
