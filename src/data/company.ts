@@ -1,3 +1,6 @@
+// International format; used for every "tel:" link on the site.
+const PHONE = "+27679340400";
+
 export const company = {
   name: "XFIT",
   fullName: "XFIT-Extreme Fitness Gym",
@@ -6,9 +9,12 @@ export const company = {
     "A local fitness gym in Nkowankowa focused on helping people train, improve, and become stronger.",
 
   contact: {
-    phone: "+27679340400",
+    phone: PHONE,
     displayPhone: "067 934 0400",
-    telHref: "tel:0679340400",
+    // Always render the number as a real link (<a href={telHref}>), never as
+    // plain text: Safari auto-links plain phone numbers before React
+    // hydrates, which causes a hydration mismatch.
+    telHref: `tel:${PHONE}`,
   },
 
   address: {

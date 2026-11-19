@@ -9,6 +9,10 @@ import {
 } from "@/data/navigation";
 import { whatsappHref } from "@/lib/whatsapp";
 
+// Server component: the year is worked out on the server only (never
+// re-rendered in the browser), so it can't cause a hydration mismatch.
+const copyrightYear = new Date().getFullYear();
+
 const headingClasses =
   "text-[11px] font-bold uppercase tracking-[0.14em] text-[#ff3b3b]";
 
@@ -125,7 +129,7 @@ export function Footer() {
 
         <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-6 text-[13px] text-white/65 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} {company.fullName}
+            © {copyrightYear} {company.fullName}
           </p>
 
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">

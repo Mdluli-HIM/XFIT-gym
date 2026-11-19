@@ -29,6 +29,12 @@ export type DemoMember = {
  *   XFIT-1001  active      (payment due in 12 days)
  *   XFIT-1002  payment due (5 days overdue)
  *   XFIT-1003  expired     (lapsed 45 days ago)
+ *
+ * HYDRATION SAFETY: these dates depend on "today", so they must only be
+ * rendered in the browser. The dashboard and scanner show a "Loading"
+ * screen on the server and only read members after mounting
+ * (useSyncExternalStore client check). Keep it that way: never render
+ * these dates (or Intl date formatting) in server-rendered HTML.
  */
 function daysFromToday(days: number) {
   const date = new Date();

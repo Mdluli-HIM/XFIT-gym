@@ -42,6 +42,17 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+
+  // Stop Safari / iOS from turning phone numbers, dates ("Closes 8pm"),
+  // addresses and emails into links on their own. Those automatic links
+  // change the HTML before React hydrates and cause hydration errors.
+  // Phone numbers are explicit tel: links instead.
+  formatDetection: {
+    telephone: false,
+    date: false,
+    address: false,
+    email: false,
+  },
 };
 
 // viewport-fit=cover lets fixed elements (the phone action bar)

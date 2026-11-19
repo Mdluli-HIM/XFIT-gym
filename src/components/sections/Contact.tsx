@@ -161,7 +161,21 @@ export function Contact() {
             </div>
 
             <p className="mt-4 text-[13px] text-white/70">
-              {company.contact.displayPhone} · {company.social.instagramHandle}
+              <a
+                href={company.contact.telHref}
+                className="underline-offset-4 transition-colors hover:text-white hover:underline"
+              >
+                {company.contact.displayPhone}
+              </a>
+              {" · "}
+              <a
+                href={company.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline-offset-4 transition-colors hover:text-white hover:underline"
+              >
+                {company.social.instagramHandle}
+              </a>
             </p>
 
             {/* Map: Google is only contacted after the visitor taps "Show map" */}
