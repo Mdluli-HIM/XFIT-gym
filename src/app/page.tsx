@@ -5,6 +5,7 @@ import { TrainingApproach } from "@/components/sections/TrainingApproach";
 import { WorkoutOptions } from "@/components/sections/WorkoutOptions";
 import { Trainers } from "@/components/sections/Trainers";
 import { Membership } from "@/components/sections/Membership";
+import { About } from "@/components/sections/About";
 import { MobileActionBar } from "@/components/layout/MobileActionBar";
 
 export default function Home() {
@@ -23,11 +24,7 @@ export default function Home() {
 
       <Membership />
 
-      <section
-        id="about"
-        className="min-h-screen bg-white"
-        aria-label="About XFIT"
-      />
+      <About />
 
       <section
         id="contact"
