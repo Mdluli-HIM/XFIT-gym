@@ -171,11 +171,7 @@ export function WorkoutOptions() {
                 src={item.image}
                 alt={`${item.title} training at XFIT`}
                 fill
-                sizes="
-                  (max-width: 639px) 82vw,
-                  (max-width: 767px) 62vw,
-                  390px
-                "
+                sizes="(max-width: 639px) 82vw, (max-width: 767px) 62vw, (max-width: 1023px) 360px, 390px"
                 className="
                   object-cover
                   transition-transform

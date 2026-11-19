@@ -152,7 +152,7 @@ export function GymExperience() {
                 src={item.image}
                 alt={item.alt}
                 fill
-                sizes="(max-width: 767px) 82vw, 33vw"
+                sizes="(max-width: 639px) 82vw, (max-width: 767px) 64vw, 33vw"
                 className="
                   object-cover
                   transition-transform
