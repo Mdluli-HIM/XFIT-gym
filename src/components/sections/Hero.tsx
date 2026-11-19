@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
+import { company } from "@/data/company";
 
 const reveal = {
   hidden: {
@@ -232,8 +233,8 @@ export function Hero() {
           className="relative z-[5] flex items-end justify-between border-t border-white/15 pt-4"
         >
           <div className="text-[8px] font-semibold uppercase leading-[1.45] tracking-[0.12em] text-white/45 md:text-[9px]">
-            <p>Mon – Fri / 06:00 – 20:00</p>
-            <p>Sat / 07:00 – 14:00</p>
+            <p>{company.hours.closes}</p>
+            <p>{company.hours.placeholder}</p>
           </div>
 
           <Link

@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
+import { company } from "@/data/company";
 
 type MenuKey = "gym" | "training" | "membership";
 
@@ -757,9 +758,9 @@ export function Header() {
                 </div>
 
                 <div className="text-right">
-                  Mon – Fri
+                  {company.hours.closes}
                   <br />
-                  06:00 – 20:00
+                  {company.hours.placeholder}
                 </div>
               </div>
 

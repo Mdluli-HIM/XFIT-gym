@@ -21,21 +21,15 @@ export const company = {
     formatted: "B, 2946 Tambo St, Nkowankowa, 0870",
   },
 
+  // ONE place for opening hours. Only the closing time is confirmed
+  // (Google: closes 8pm). When the full hours are confirmed, set
+  // `confirmed: true` and fill `days`, and update the components that
+  // read `hours` to list them.
   hours: {
-    weekdays: {
-      label: "Monday – Friday",
-      value: "06:00 – 20:00",
-    },
-
-    saturday: {
-      label: "Saturday",
-      value: "07:00 – 14:00",
-    },
-
-    sunday: {
-      label: "Sunday",
-      value: "Closed",
-    },
+    confirmed: false,
+    closes: "Closes 8pm",
+    placeholder: "Full hours: to be confirmed",
+    days: [] as { label: string; value: string }[],
   },
 
   social: {
