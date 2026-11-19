@@ -3,7 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+} from "framer-motion";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -138,6 +142,9 @@ export function Header() {
   const wasMenuOpen = useRef(false);
 
   const megaMenuOpen = activeMenu !== null;
+
+  // Reduce Motion: open/close menus instantly instead of wiping.
+  const reduceMotion = useReducedMotion();
 
   // Mobile menu: lock page scroll, move focus into the menu,
   // close on Escape and keep Tab inside the menu while open.
@@ -495,7 +502,7 @@ export function Header() {
                 clipPath: "inset(0 0 100% 0)",
               }}
               transition={{
-                duration: 0.32,
+                duration: reduceMotion ? 0 : 0.32,
                 ease: [0.76, 0, 0.24, 1],
               }}
               className="
@@ -661,7 +668,7 @@ export function Header() {
               clipPath: "inset(0 0 100% 0)",
             }}
             transition={{
-              duration: 0.65,
+              duration: reduceMotion ? 0 : 0.65,
               ease: [0.76, 0, 0.24, 1],
             }}
             ref={mobileMenuRef}

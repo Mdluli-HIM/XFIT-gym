@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 
+import { MotionProvider } from "@/components/providers/MotionProvider";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 
 import "./globals.css";
@@ -61,7 +62,9 @@ export default function RootLayout({
       className={`${GeistSans.variable} ${GeistMono.variable}`}
     >
       <body>
-        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        <MotionProvider>
+          <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        </MotionProvider>
       </body>
     </html>
   );

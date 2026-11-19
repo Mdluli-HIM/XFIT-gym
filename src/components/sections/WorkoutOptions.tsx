@@ -81,9 +81,13 @@ export function WorkoutOptions() {
       430
     );
 
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
     track.scrollBy({
       left: direction === "right" ? distance : -distance,
-      behavior: "smooth",
+      behavior: reduceMotion ? "auto" : "smooth",
     });
   };
 
