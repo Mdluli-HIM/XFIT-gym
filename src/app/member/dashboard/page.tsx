@@ -394,18 +394,12 @@ export default function MemberDashboardPage() {
 
             <div>
               {member.recentVisits.map(
-                (visit, index) => (
+                visit => (
                   <div
                     key={`${visit.date}-${visit.time}`}
                     className="flex items-center justify-between border-b border-white/[0.07] px-5 py-5 last:border-b-0 md:px-6"
                   >
                     <div className="flex items-center gap-4">
-                      <span className="text-[9px] font-bold text-white/25">
-                        {String(
-                          index + 1
-                        ).padStart(2, "0")}
-                      </span>
-
                       <div>
                         <p className="text-sm font-semibold">
                           {formatDate(

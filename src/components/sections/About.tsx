@@ -62,17 +62,12 @@ export function About() {
             </p>
 
             <ul className="mt-4 border-t border-white/15">
-              {about.trainingTypes.map((type, index) => (
+              {about.trainingTypes.map(type => (
                 <li
                   key={type}
-                  className="flex items-baseline justify-between border-b border-white/15 py-3"
+                  className="border-b border-white/15 py-3 text-[clamp(2rem,9vw,3rem)] font-black uppercase leading-[0.9] tracking-[-0.06em]"
                 >
-                  <span className="text-[clamp(2rem,9vw,3rem)] font-black uppercase leading-[0.9] tracking-[-0.06em]">
-                    {type}
-                  </span>
-                  <span className="text-[11px] font-bold tracking-[0.13em] text-white/70">
-                    {String(index + 1).padStart(2, "0")}.
-                  </span>
+                  {type}
                 </li>
               ))}
             </ul>

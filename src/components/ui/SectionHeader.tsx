@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type SectionHeaderProps = {
-  /** Small label above the title, e.g. "04 / Membership". */
+  /** Small label above the title, e.g. "Membership" (words only, no numbers). */
   label: string;
   /** Big uppercase title. */
   title: ReactNode;

@@ -66,7 +66,7 @@ export function Contact() {
       <Container className="py-20 md:py-28 lg:py-36">
         <SectionHeader
           titleId="contact-title"
-          label="06 / Contact"
+          label="Contact"
           title={
             <>
               Come train

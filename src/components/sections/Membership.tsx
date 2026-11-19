@@ -31,7 +31,7 @@ export function Membership() {
       <Container className="relative py-20 md:py-28 lg:py-36">
         <SectionHeader
           titleId="membership-title"
-          label="04 / Membership"
+          label="Membership"
           title={
             <>
               Pick your plan.

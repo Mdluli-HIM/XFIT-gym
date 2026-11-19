@@ -213,11 +213,6 @@ export function WorkoutOptions() {
                 />
               </div>
 
-              {/* Number */}
-              <span className="absolute right-5 top-6 text-[9px] font-bold tracking-[0.13em] text-white/55">
-                {item.number}
-              </span>
-
               {/* Card content */}
               <div className="absolute inset-x-0 bottom-0 p-6 md:p-7">
                 <h3

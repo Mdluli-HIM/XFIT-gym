@@ -15,8 +15,8 @@ export function TrainingApproach() {
       <Container className="py-20 md:py-28 lg:py-36">
         {/* Top label */}
         <div className="flex items-center justify-between border-b border-black/15 pb-4">
-          <p className="text-[9px] font-bold uppercase tracking-[0.14em] text-black/45 md:text-[10px]">
-            02 / Training
+          <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#b42318]">
+            Training
           </p>
 
           <ArrowDownRight
@@ -89,7 +89,7 @@ export function TrainingApproach() {
         <div className="mt-16 border-t border-black/15 md:mt-24 lg:mt-28">
           {trainingPrinciples.map((item, index) => (
             <motion.article
-              key={item.number}
+              key={item.title}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{
@@ -107,16 +107,12 @@ export function TrainingApproach() {
                 border-black/15
                 py-7
 
-                md:grid-cols-[80px_1fr_300px]
+                md:grid-cols-[1fr_300px]
                 md:items-center
                 md:gap-10
                 md:py-9
               "
             >
-              <span className="text-[9px] font-bold tracking-[0.13em] text-[#b42318] md:text-[10px]">
-                {item.number}
-              </span>
-
               <h3
                 className="
                   text-[clamp(2.2rem,10vw,3.8rem)]

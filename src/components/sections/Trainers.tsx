@@ -34,7 +34,7 @@ export function Trainers() {
         <SectionHeader
           tone="light"
           titleId="trainers-title"
-          label="03 / Trainers"
+          label="Trainers"
           title={
             <>
               Train with

@@ -34,7 +34,7 @@ export function GymExperience() {
             }}
           >
             <p className="mb-4 text-[9px] font-bold uppercase tracking-[0.15em] text-red-500 md:text-[10px]">
-              01 / XFIT
+              The gym
             </p>
 
             <h2
@@ -166,13 +166,6 @@ export function GymExperience() {
               <div className="absolute inset-0 bg-black/15" />
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/10" />
-
-              {/* Card number */}
-              <div className="absolute left-4 top-4 md:left-5 md:top-5">
-                <span className="text-[9px] font-bold uppercase tracking-[0.12em] text-white/60">
-                  {item.number}
-                </span>
-              </div>
 
               {/* Card title */}
               <div className="absolute inset-x-0 bottom-0 p-5 md:p-6 lg:p-7">

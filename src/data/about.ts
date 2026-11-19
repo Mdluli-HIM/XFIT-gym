@@ -6,7 +6,7 @@ import { cheapestPlan, formatRand } from "@/data/memberships";
  * The price line is worked out from data/memberships.ts automatically.
  */
 export const about = {
-  label: "05 / About",
+  label: "About XFIT",
   title: ["Become your", "best self."],
   intro:
     "XFIT-Extreme Fitness Gym is a local gym in Nkowankowa for anyone ready to put in the work.",
