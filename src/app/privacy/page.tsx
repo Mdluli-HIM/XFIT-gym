@@ -10,6 +10,7 @@ import { company } from "@/data/company";
 export const metadata: Metadata = {
   title: "Privacy",
   description: `How ${company.fullName} handles your information on this website.`,
+  alternates: { canonical: "/privacy" },
 };
 
 // TO REVIEW WITH OWNER: plain-English notice, not legal advice.

@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 
+import { company } from "@/data/company";
+import { seo } from "@/data/seo";
 import { siteUrl } from "@/lib/site-url";
 import { MotionProvider } from "@/components/providers/MotionProvider";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
@@ -12,30 +14,28 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
 
   title: {
-    default: "XFIT Extreme Fitness Gym | Nkowankowa",
-    template: "%s | XFIT",
+    default: seo.title,
+    template: seo.titleTemplate,
   },
 
-  description:
-    "XFIT Extreme Fitness Gym in Nkowankowa, Limpopo. Train, improve your fitness, and become stronger at your local XFIT gym.",
+  description: seo.description,
+  keywords: [...seo.keywords],
+  applicationName: company.fullName,
 
-  keywords: [
-    "XFIT",
-    "XFIT Extreme Fitness Gym",
-    "Gym Nkowankowa",
-    "Gym in Nkowankowa",
-    "Gym Tzaneen",
-    "Fitness Nkowankowa",
-    "Fitness Gym Limpopo",
-  ],
-
+  // Share image comes from app/opengraph-image.tsx and twitter-image.tsx.
   openGraph: {
-    title: "XFIT Extreme Fitness Gym",
-    description:
-      "Extreme fitness training in Nkowankowa, Limpopo.",
+    title: seo.shareTitle,
+    description: seo.shareDescription,
+    url: "/",
     type: "website",
     locale: "en_ZA",
-    siteName: "XFIT Extreme Fitness Gym",
+    siteName: company.fullName,
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: seo.shareTitle,
+    description: seo.shareDescription,
   },
 
   robots: {
@@ -61,6 +61,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
+  themeColor: seo.themeColor,
 };
 
 export default function RootLayout({
