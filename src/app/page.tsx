@@ -7,30 +7,36 @@ import { Trainers } from "@/components/sections/Trainers";
 import { Membership } from "@/components/sections/Membership";
 import { About } from "@/components/sections/About";
 import { Contact } from "@/components/sections/Contact";
+import { Footer } from "@/components/layout/Footer";
 import { MobileActionBar } from "@/components/layout/MobileActionBar";
 
 export default function Home() {
   return (
-    <main>
+    <>
       <Header />
-      <Hero />
 
-      <GymExperience />
+      <main>
+        <Hero />
 
-      <TrainingApproach />
+        <GymExperience />
 
-      <WorkoutOptions />
+        <TrainingApproach />
 
-      <Trainers />
+        <WorkoutOptions />
 
-      <Membership />
+        <Trainers />
 
-      <About />
+        <Membership />
 
-      <Contact />
+        <About />
+
+        <Contact />
+      </main>
+
+      <Footer />
 
       {/* Keep last: sticky Join / Call bar on phones */}
       <MobileActionBar />
-    </main>
+    </>
   );
 }

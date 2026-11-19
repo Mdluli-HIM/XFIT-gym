@@ -1,6 +1,6 @@
 export const company = {
   name: "XFIT",
-  fullName: "XFIT Extreme Fitness Gym",
+  fullName: "XFIT-Extreme Fitness Gym",
 
   description:
     "A local fitness gym in Nkowankowa focused on helping people train, improve, and become stronger.",
