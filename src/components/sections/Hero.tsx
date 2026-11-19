@@ -21,7 +21,7 @@ const reveal = {
 
 export function Hero() {
   return (
-    <section className="relative z-10 isolate min-h-[100svh] overflow-visible bg-[#290b09] text-white">
+    <section className="relative z-10 isolate min-h-[100svh] overflow-x-clip overflow-y-visible bg-[#290b09] text-white">
       {/* Original XFIT red / black hero background */}
       <div className="absolute inset-0 -z-30 bg-[#43100c]" />
 
