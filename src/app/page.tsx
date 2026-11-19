@@ -6,6 +6,7 @@ import { WorkoutOptions } from "@/components/sections/WorkoutOptions";
 import { Trainers } from "@/components/sections/Trainers";
 import { Membership } from "@/components/sections/Membership";
 import { About } from "@/components/sections/About";
+import { Contact } from "@/components/sections/Contact";
 import { MobileActionBar } from "@/components/layout/MobileActionBar";
 
 export default function Home() {
@@ -26,11 +27,7 @@ export default function Home() {
 
       <About />
 
-      <section
-        id="contact"
-        className="min-h-screen bg-[#111111]"
-        aria-label="Contact XFIT"
-      />
+      <Contact />
 
       {/* Keep last: sticky Join / Call bar on phones */}
       <MobileActionBar />
