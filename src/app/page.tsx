@@ -3,6 +3,7 @@ import { Hero } from "@/components/sections/Hero";
 import { GymExperience } from "@/components/sections/GymExperience";
 import { TrainingApproach } from "@/components/sections/TrainingApproach";
 import { WorkoutOptions } from "@/components/sections/WorkoutOptions";
+import { Trainers } from "@/components/sections/Trainers";
 import { Membership } from "@/components/sections/Membership";
 import { MobileActionBar } from "@/components/layout/MobileActionBar";
 
@@ -17,6 +18,8 @@ export default function Home() {
       <TrainingApproach />
 
       <WorkoutOptions />
+
+      <Trainers />
 
       <Membership />
 
