@@ -11,6 +11,7 @@ import { About } from "@/components/sections/About";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/layout/Footer";
 import { MobileActionBar } from "@/components/layout/MobileActionBar";
+import { LocalBusinessJsonLd } from "@/components/seo/LocalBusinessJsonLd";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -19,6 +20,8 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
+      <LocalBusinessJsonLd />
+
       <Header />
 
       <main>

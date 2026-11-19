@@ -1,3 +1,20 @@
+export type DayName =
+  | "Monday"
+  | "Tuesday"
+  | "Wednesday"
+  | "Thursday"
+  | "Friday"
+  | "Saturday"
+  | "Sunday";
+
+export type OpeningHours = {
+  dayOfWeek: DayName[];
+  /** 24-hour time, e.g. "06:00" */
+  opens: string;
+  /** 24-hour time, e.g. "20:00" */
+  closes: string;
+};
+
 // International format; used for every "tel:" link on the site.
 const PHONE = "+27679340400";
 
@@ -28,15 +45,19 @@ export const company = {
   },
 
   // ONE place for opening hours. Only the closing time is confirmed
-  // (Google: closes 8pm). When the full hours are confirmed, set
-  // `confirmed: true` and fill `days`, and update the components that
-  // read `hours` to list them.
+  // (Google: closes 8pm). When the full hours are confirmed: fill
+  // `days` (e.g. { dayOfWeek: ["Monday", "Tuesday"], opens: "06:00",
+  // closes: "20:00" }), set `confirmed: true`, and update the components
+  // that read `hours` to list them. Google's structured data only
+  // includes hours once `confirmed` is true.
   hours: {
     confirmed: false,
     closes: "Closes 8pm",
     placeholder: "Full hours: to be confirmed",
-    days: [] as { label: string; value: string }[],
+    days: [] as OpeningHours[],
   },
+
+  payments: ["Cash", "Card (Yoco)", "EFT"],
 
   // TO CONFIRM WITH OWNER: is the WhatsApp number the same as the phone
   // number? If not, change `number` (international format, no + or spaces).
