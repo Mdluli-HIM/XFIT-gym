@@ -32,13 +32,39 @@ export const company = {
     days: [] as { label: string; value: string }[],
   },
 
+  // TO CONFIRM WITH OWNER: is the WhatsApp number the same as the phone
+  // number? If not, change `number` (international format, no + or spaces).
+  whatsapp: {
+    number: "27679340400",
+    toConfirm: true,
+    defaultMessage: "Hi XFIT, I have a question",
+  },
+
   social: {
     instagram: "https://www.instagram.com/xfitextremefitness/",
+    instagramHandle: "@xfitextremefitness",
+  },
+
+  google: {
+    // Google Business listing (temporary share link, used for "Review us").
+    listing: "https://share.google/Bvk9XxXl6c0n6XHPK",
   },
 
   maps: {
-    directions: "https://share.google/f0ZkCOcqfIY1ggSR1",
+    // Search text used for directions and the map. TO CHECK: the pin
+    // lands on the gym (adjust the text if Google picks the wrong spot).
+    query: "XFIT-Extreme Fitness Gym, B, 2946 Tambo St, Nkowankowa, 0870",
   },
 } as const;
+
+/** Google Maps directions to the gym (opens the Maps app on phones). */
+export const directionsHref = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+  company.maps.query
+)}`;
+
+/** Google Maps embed (no API key). Only loaded when the visitor taps "Show map". */
+export const mapEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(
+  company.maps.query
+)}&output=embed`;
 
 export type Company = typeof company;

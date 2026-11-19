@@ -3,6 +3,7 @@ import { Hero } from "@/components/sections/Hero";
 import { GymExperience } from "@/components/sections/GymExperience";
 import { TrainingApproach } from "@/components/sections/TrainingApproach";
 import { WorkoutOptions } from "@/components/sections/WorkoutOptions";
+import { Membership } from "@/components/sections/Membership";
 import { MobileActionBar } from "@/components/layout/MobileActionBar";
 
 export default function Home() {
@@ -11,18 +12,13 @@ export default function Home() {
       <Header />
       <Hero />
 
-      {/* Upcoming sections */}
       <GymExperience />
 
       <TrainingApproach />
 
       <WorkoutOptions />
 
-      <section
-        id="membership"
-        className="min-h-screen bg-[#111111]"
-        aria-label="Membership"
-      />
+      <Membership />
 
       <section
         id="about"
