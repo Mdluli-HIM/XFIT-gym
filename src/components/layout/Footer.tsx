@@ -26,7 +26,6 @@ export function Footer() {
         {/* Wordmark */}
         <Link
           href="/"
-          aria-label="XFIT home"
           className="inline-flex items-end gap-3"
         >
           <span className="text-[clamp(4.5rem,24vw,9rem)] font-black leading-[0.8] tracking-[-0.08em]">

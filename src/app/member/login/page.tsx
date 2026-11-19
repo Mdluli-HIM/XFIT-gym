@@ -92,7 +92,8 @@ export default function MemberLoginPage() {
             src="/images/hero/hero-athlete.png"
             alt=""
             fill
-            priority
+            loading="eager"
+            fetchPriority="high"
             sizes="(max-width: 768px) 70vw, 48vw"
             className="object-contain object-bottom"
           />

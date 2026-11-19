@@ -251,7 +251,6 @@ export function Header() {
               {/* Logo */}
               <Link
                 href="/"
-                aria-label="XFIT home"
                 onMouseEnter={() => setActiveMenu(null)}
                 className="relative z-20 flex shrink-0 items-center gap-2.5"
               >

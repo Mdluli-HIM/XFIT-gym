@@ -63,15 +63,16 @@ export function Hero() {
         X
       </div>
 
-      {/* Transparent athlete / hero artwork */}
+      {/* Transparent athlete / hero artwork.
+          Visible from the first paint (no fade from 0): it's the largest
+          element on screen, so waiting for JavaScript to fade it in made
+          the page look slow to Lighthouse (LCP). It still eases in. */}
       <motion.div
         initial={{
-          opacity: 0,
           scale: 1.04,
           x: 30,
         }}
         animate={{
-          opacity: 1,
           scale: 1,
           x: 0,
         }}
@@ -113,7 +114,8 @@ export function Hero() {
           src="/images/hero/hero-athlete.png"
           alt=""
           fill
-          priority
+          loading="eager"
+          fetchPriority="high"
           sizes="(max-width: 640px) 72vw, (max-width: 1024px) 50vw, 40vw"
           className="object-contain object-bottom"
         />

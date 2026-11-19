@@ -2,7 +2,9 @@
 
 @theme {
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* System monospace: only used for the demo login codes. Loading the
+     Geist Mono web font for that slowed down every page. */
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   --color-background: #0a0a0a;
   --color-foreground: #f5f5f5;

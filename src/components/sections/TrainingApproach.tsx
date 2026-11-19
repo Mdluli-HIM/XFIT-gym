@@ -136,11 +136,11 @@ export function TrainingApproach() {
 
         {/* Bottom detail */}
         <div className="mt-8 flex items-end justify-between md:mt-12">
-          <p className="text-[8px] font-bold uppercase tracking-[0.14em] text-black/35">
+          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-black/65">
             XFIT / Nkowankowa
           </p>
 
-          <p className="text-right text-[8px] font-bold uppercase leading-[1.4] tracking-[0.12em] text-[#b42318]">
+          <p className="text-right text-[10px] font-bold uppercase leading-[1.4] tracking-[0.12em] text-[#b42318]">
             Stronger every
             <br />
             session
@@ -148,7 +148,7 @@ export function TrainingApproach() {
         </div>
       </Container>
 
-      {/* Large decorative text */}
+      {/* Large decorative text (drawn with CSS so it isn't read as page text) */}
       <div
         aria-hidden="true"
         className="
@@ -163,11 +163,10 @@ export function TrainingApproach() {
           tracking-[-0.1em]
           text-black/[0.025]
 
+          before:content-['FIT']
           md:text-[28vw]
         "
-      >
-        FIT
-      </div>
+      />
     </section>
   );
 }

@@ -76,11 +76,11 @@ export function GymExperience() {
 
         {/* Mobile swipe cue */}
         <div className="mt-12 flex items-center justify-between border-b border-white/10 pb-3 md:hidden">
-          <span className="text-[8px] font-bold uppercase tracking-[0.14em] text-white/35">
+          <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-white/70">
             Explore XFIT
           </span>
 
-          <span className="text-[8px] font-bold uppercase tracking-[0.14em] text-white/35">
+          <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-white/70">
             Swipe →
           </span>
         </div>
@@ -191,11 +191,11 @@ export function GymExperience() {
 
         {/* Bottom detail */}
         <div className="mt-10 flex items-end justify-between border-t border-white/10 pt-4 md:mt-14">
-          <p className="text-[8px] font-semibold uppercase tracking-[0.12em] text-red-500">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-red-500">
             Nkowankowa / Limpopo
           </p>
 
-          <p className="max-w-[160px] text-right text-[8px] uppercase leading-[1.4] tracking-[0.1em] text-white/30 md:max-w-[230px]">
+          <p className="max-w-[180px] text-right text-[10px] uppercase leading-[1.4] tracking-[0.1em] text-white/65 md:max-w-[230px]">
             Train with purpose.
             <br />
             Build your progress.
