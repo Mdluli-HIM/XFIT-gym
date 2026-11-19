@@ -38,11 +38,6 @@ export const metadata: Metadata = {
     description: seo.shareDescription,
   },
 
-  robots: {
-    index: true,
-    follow: true,
-  },
-
   // Stop Safari / iOS from turning phone numbers, dates ("Closes 8pm"),
   // addresses and emails into links on their own. Those automatic links
   // change the HTML before React hydrates and cause hydration errors.
