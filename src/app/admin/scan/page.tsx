@@ -21,6 +21,7 @@ import {
 import {
   getDemoMemberById,
   getDemoMemberByNumber,
+  getMembershipState,
   type DemoMember,
 } from "@/data/demo-members";
 
@@ -37,7 +38,7 @@ import {
 type ScanState =
   | "valid"
   | "payment_due"
-  | "inactive"
+  | "expired"
   | "invalid";
 
 type ValidationResult = {
@@ -59,15 +60,9 @@ function validateMember(
     };
   }
 
-  const paymentDate = new Date(
-    `${member.paymentDueDate}T23:59:59`
-  );
+  const state = getMembershipState(member);
 
-  if (
-    member.status === "payment_due" ||
-    (member.status === "active" &&
-      paymentDate.getTime() < Date.now())
-  ) {
+  if (state === "payment_due") {
     return {
       state: "payment_due",
       member,
@@ -77,13 +72,13 @@ function validateMember(
     };
   }
 
-  if (member.status === "inactive") {
+  if (state === "expired") {
     return {
-      state: "inactive",
+      state: "expired",
       member,
-      title: "Membership inactive",
+      title: "Membership expired",
       message:
-        "This membership is currently inactive.",
+        "This membership has expired. Renew before entry.",
     };
   }
 
@@ -254,7 +249,7 @@ export default function AdminScanPage() {
       text: "text-[#ffbd45]",
       Icon: CircleAlert,
     },
-    inactive: {
+    expired: {
       border: "border-[#ef2a32]/35",
       bg: "bg-[#ef2a32]/10",
       text: "text-[#ff4b52]",
@@ -546,7 +541,7 @@ export default function AdminScanPage() {
                 }
                 className="border border-white/10 p-3 text-[8px] font-bold uppercase tracking-[0.08em] text-white/40"
               >
-                Inactive
+                Expired
               </button>
             </div>
           </div>

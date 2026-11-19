@@ -25,6 +25,28 @@ import {
   demoLogout,
   getCurrentDemoMember,
 } from "@/lib/member-demo";
+import { getMembershipState } from "@/data/demo-members";
+
+const statusDisplay = {
+  active: {
+    label: "Active",
+    card: "Valid",
+    icon: "text-[#32cf74]",
+    dot: "bg-[#71ff9f]",
+  },
+  payment_due: {
+    label: "Payment due",
+    card: "Payment due",
+    icon: "text-[#ffbd45]",
+    dot: "bg-[#ffbd45]",
+  },
+  expired: {
+    label: "Expired",
+    card: "Expired",
+    icon: "text-[#ef2a32]",
+    dot: "bg-black",
+  },
+} as const;
 
 function formatDate(value: string) {
   return new Intl.DateTimeFormat("en-ZA", {
@@ -95,7 +117,8 @@ export default function MemberDashboardPage() {
     );
   }
 
-  const isActive = member.status === "active";
+  const status =
+    statusDisplay[getMembershipState(member)];
 
   return (
     <main className="min-h-[100svh] bg-[#0d0d0d] text-white">
@@ -160,16 +183,12 @@ export default function MemberDashboardPage() {
               </span>
 
               <BadgeCheck
-                className={
-                  isActive
-                    ? "size-5 text-[#32cf74]"
-                    : "size-5 text-[#ef2a32]"
-                }
+                className={`size-5 ${status.icon}`}
               />
             </div>
 
             <p className="mt-7 text-2xl font-black uppercase tracking-[-0.045em]">
-              {isActive ? "Active" : "Action needed"}
+              {status.label}
             </p>
 
             <p className="mt-2 text-xs text-white/35">
@@ -343,10 +362,10 @@ export default function MemberDashboardPage() {
 
                 <div className="text-right">
                   <span className="inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-[0.1em]">
-                    <span className="size-1.5 rounded-full bg-[#71ff9f]" />
-                    {isActive
-                      ? "Valid"
-                      : "Check membership"}
+                    <span
+                      className={`size-1.5 rounded-full ${status.dot}`}
+                    />
+                    {status.card}
                   </span>
                 </div>
               </div>
