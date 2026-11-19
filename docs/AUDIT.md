@@ -1,6 +1,6 @@
 # XFIT codebase audit
 
-**First audit:** 2026-11-19 on `5219c33`. **Updated:** 2026-11-19 on branch `website-finish` after the fixes below.
+**First audit:** 2026-11-19 on `5219c33`. **Updated:** 2026-11-19 on branch `website-finish` after the final website polish.
 Legend: ✅ fixed · ⏳ still open · 🧩 needs info from the owner
 
 ---
@@ -28,20 +28,26 @@ Legend: ✅ fixed · ⏳ still open · 🧩 needs info from the owner
 | **Footer** + `/privacy` | Links to every section, contact, hours, member login, privacy, credit; plain-English POPIA notice | `9cf71c2` |
 | Navigation | All sections in desktop + phone menus; every link checked; no `href="#"` | `8f998c2` |
 | Dashboard | Status dot colour now matches the status | `60d668f` |
+| Safari hydration | `format-detection` meta (no auto-linking of phone/dates/addresses); phone always an explicit `tel:+27679340400` link | `4d581e2` |
+| Template numbering | All "01 /", "01." style numbers removed (section labels, principles, training list, photo cards, dashboard list) | `686bdf4` |
+| SEO | Title "XFIT Extreme Fitness Gym \| Nkowankowa, Tzaneen", local description, Open Graph + Twitter tags, generated share image, favicon + app icons, manifest, `robots.txt`, `sitemap.xml`, canonical per page, member/admin `noindex` | `98f0dc4` |
+| Structured data | schema.org `ExerciseGym` JSON-LD (name, address, phone, Instagram, map, price range, payments); hours added automatically once confirmed | `0f13dd0` |
+| 404 page | "Wrong turn." page in XFIT style with Back home / Membership / Contact | `1a53dc4` |
+| Lighthouse | Hero visible from first paint, deprecated `priority` replaced, Geist Mono no longer loaded, contrast + link-name fixes (Accessibility 97 → 100) | `50d9eb7` |
 
 ### ⏳ Still open: public website
 
 | # | Item | Size |
 |---|---|---|
 | 1 | 🧩 Real content from the owner (see §1) | content |
-| 2 | Readability in the **older** sections (hero, gym, training, workouts, header): many 8–10px labels and low-contrast text (`text-white/35…/45`, `text-black/35…/45`). New sections use 11px+ and higher contrast. | medium |
+| 2 | Readability in the **older** sections (hero, header, workout cards): still some 8–9px labels. Lighthouse contrast now passes (100), but bigger labels would read better on phones. | small |
 | 3 | Keyboard: desktop mega menu doesn't close on Escape/blur; older components have no custom `focus-visible` styles | small |
 | 4 | Carousel end spacing / snapping (WorkoutOptions + GymExperience): add `scroll-padding` and a trailing spacer | small |
 | 5 | Image cropping: per-image `object-position` on workout/gym cards; the Training mega menu shows gym photos, not workout photos | small |
 | 6 | Hero on phones: big empty gap above the Gym section (`pt-44`) | small |
 | 7 | Hero PNG cut-outs are still ~1.5 MB (transparency): convert to WebP; delete unused `hero-athlete-option-2.png` | small |
-| 8 | `next/image` `priority` is deprecated in Next 16: switch to `preload` (Hero, member login) | small |
-| 9 | SEO: OG image, `sitemap.ts`, `robots.ts`, local-business structured data, XFIT favicon (still default), branded 404; set `NEXT_PUBLIC_SITE_URL` in Vercel once a domain exists | medium |
+| 8 | SEO follow-ups: set `NEXT_PUBLIC_SITE_URL` in Vercel once a domain exists (canonical, sitemap, share image and structured data all follow it); add the real opening hours (they then appear in Google's structured data automatically); claim/verify the Google Business listing and submit the sitemap in Google Search Console | small |
+| 9 | Performance: Lighthouse's *simulated* mobile score on localhost is 86–91 (it over-penalises the page's JavaScript when everything is local); with real throttling it's 95. Run PageSpeed Insights on the production URL after merging. Further gains would need less JavaScript (e.g. fewer Framer Motion client sections). | medium |
 | 10 | `npm audit fix` for the remaining dev-tool advisories (1 high, 7 moderate; lint tooling only, safe, no `--force`) | small |
 | 11 | Clean-up: unused packages (`gsap`, `@gsap/react`, `three`, `@react-three/*`, `@types/three`); README is the Create Next App template | small |
 | 12 | Without JavaScript, animated sections start invisible (`opacity: 0`) | small |
@@ -52,11 +58,10 @@ Legend: ✅ fixed · ⏳ still open · 🧩 needs info from the owner
 | # | Item | Size |
 |---|---|---|
 | 1 | Stop the camera when leaving `/admin/scan` or logging out | small |
-| 2 | Mark `/member/*` and `/admin/*` as `noindex` | small |
-| 3 | Separate (or clearly label) the staff login; route group so portals don't load the marketing site's smooth scrolling | small |
-| 4 | Accessibility: `aria-pressed` on the Member/Admin toggle, visible input focus, live region for scan results | small |
-| 5 | Real backend on xneelo (SA): database, real authentication, signed/expiring QR codes, check-in log, payments (cash/Yoco/EFT), POPIA-compliant member data. **Needs Marcus's OK** (costs money, real data) | large |
-| 6 | Admin tools: member list, add/renew, record payment, attendance reports | large |
+| 2 | Separate (or clearly label) the staff login; route group so portals don't load the marketing site's smooth scrolling | small |
+| 3 | Accessibility: `aria-pressed` on the Member/Admin toggle, visible input focus, live region for scan results | small |
+| 4 | Real backend on xneelo (SA): database, real authentication, signed/expiring QR codes, check-in log, payments (cash/Yoco/EFT), POPIA-compliant member data. **Needs Marcus's OK** (costs money, real data) | large |
+| 5 | Admin tools: member list, add/renew, record payment, attendance reports | large |
 
 ---
 
@@ -88,6 +93,14 @@ Legend: ✅ fixed · ⏳ still open · 🧩 needs info from the owner
 | Link check (`/`, `/privacy`, `/member/login`, all mega menus) | ✅ Every link resolves: section exists / page returns 200 / `tel:` / `https:` |
 | Enquiry form | ✅ Opens WhatsApp with the message filled in; nothing written to storage |
 | Map | ✅ No requests to Google until "Show map" is tapped |
+| Lighthouse (mobile, home page, 3 runs each) | See table below |
+
+| Lighthouse category | Before | After (simulated throttling) | After (real throttling) |
+|---|---|---|---|
+| Performance | 79–86 | 86–91 | 95 |
+| Accessibility | 97 | **100** | |
+| Best Practices | 100 | 100 | |
+| SEO | 100 | 100 | |
 
 ---
 
@@ -97,6 +110,10 @@ Legend: ✅ fixed · ⏳ still open · 🧩 needs info from the owner
 |---|---|
 | `/` | Header → Hero → Gym (`#gym`) → Training (`#training`) → Workouts (`#workouts`) → **Trainers** (`#trainers`) → **Membership** (`#membership`) → **About** (`#about`) → **Contact** (`#contact`) → **Footer** → phone action bar |
 | `/privacy` | Plain-English privacy notice (website + member demo) |
+| any unknown URL | Custom 404 "Wrong turn." page (real 404 status, noindex) |
+| `/opengraph-image`, `/twitter-image` | Generated share image (1200×630) |
+| `/icon/32`, `/icon/48`, `/icon/192`, `/icon/512`, `/apple-icon` | Generated XFIT icons |
+| `/manifest.webmanifest`, `/robots.txt`, `/sitemap.xml` | Generated from `src/app/*.ts`, using `NEXT_PUBLIC_SITE_URL` |
 | `/member/login` | Member and Admin tabs (demo) |
 | `/member/dashboard` | Member stats + QR gym card (demo) |
 | `/admin/scan` | Reception QR scanner (demo) |
@@ -105,7 +122,8 @@ Legend: ✅ fixed · ⏳ still open · 🧩 needs info from the owner
 
 | Kind | Files |
 |---|---|
-| Gym facts (single source) | `src/data/company.ts` (address, phone, WhatsApp, hours, Instagram, Google listing, maps), `memberships.ts`, `trainers.ts`, `about.ts`, `gym.ts`, `training.ts`, `workouts.ts` |
+| Gym facts (single source) | `src/data/company.ts` (address, phone, WhatsApp, hours, payments, Instagram, Google listing, maps), `memberships.ts`, `trainers.ts`, `about.ts`, `gym.ts`, `training.ts`, `workouts.ts`, `seo.ts` (titles/descriptions) |
+| SEO | `src/app/layout.tsx` (metadata), `opengraph-image.tsx`, `twitter-image.tsx`, `icon.tsx`, `apple-icon.tsx`, `manifest.ts`, `robots.ts`, `sitemap.ts`, `components/seo/LocalBusinessJsonLd.tsx`, `lib/brand-image.tsx` |
 | Links | `src/data/navigation.ts` (header, phone menu, footer) |
 | Helpers | `src/lib/whatsapp.ts` (wa.me links), `src/lib/site-url.ts` (site address) |
 | Shared UI | `ui/Container`, `ui/Button` (square XFIT buttons), `ui/SectionHeader` |
