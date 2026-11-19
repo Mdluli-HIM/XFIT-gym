@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
@@ -132,16 +132,81 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<MenuKey | null>(null);
 
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const wasMenuOpen = useRef(false);
+
   const megaMenuOpen = activeMenu !== null;
 
+  // Mobile menu: lock page scroll, move focus into the menu,
+  // close on Escape and keep Tab inside the menu while open.
   useEffect(() => {
-    if (!menuOpen) return;
+    if (!menuOpen) {
+      // Return focus to the menu button once the menu has closed.
+      if (wasMenuOpen.current) {
+        menuButtonRef.current?.focus({ preventScroll: true });
+      }
+      wasMenuOpen.current = false;
+      return;
+    }
 
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    wasMenuOpen.current = true;
+
+    const html = document.documentElement;
+    const body = document.body;
+    const previousHtmlOverflow = html.style.overflow;
+    const previousBodyOverflow = body.style.overflow;
+
+    html.style.overflow = "hidden";
+    body.style.overflow = "hidden";
+
+    closeButtonRef.current?.focus({ preventScroll: true });
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setMenuOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab" || !mobileMenuRef.current) return;
+
+      const focusable = Array.from(
+        mobileMenuRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled])'
+        )
+      );
+
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+
+      if (event.shiftKey && (active === first || !mobileMenuRef.current.contains(active))) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && (active === last || !mobileMenuRef.current.contains(active))) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    // The mobile menu only exists below the lg breakpoint.
+    const desktopQuery = window.matchMedia("(min-width: 64rem)");
+    const handleDesktop = (event: MediaQueryListEvent) => {
+      if (event.matches) setMenuOpen(false);
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    desktopQuery.addEventListener("change", handleDesktop);
 
     return () => {
-      document.body.style.overflow = previousOverflow;
+      html.style.overflow = previousHtmlOverflow;
+      body.style.overflow = previousBodyOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+      desktopQuery.removeEventListener("change", handleDesktop);
     };
   }, [menuOpen]);
 
@@ -392,27 +457,18 @@ export function Header() {
 
               {/* Mobile menu */}
               <button
+                ref={menuButtonRef}
                 type="button"
-                aria-label={
-                  menuOpen ? "Close menu" : "Open menu"
-                }
+                aria-label="Open menu"
                 aria-expanded={menuOpen}
-                onClick={() =>
-                  setMenuOpen(current => !current)
-                }
-                className="relative z-[70] grid size-10 place-items-center lg:hidden"
+                aria-controls="mobile-menu"
+                onClick={() => setMenuOpen(true)}
+                className="relative z-20 grid size-11 place-items-center lg:hidden"
               >
-                {menuOpen ? (
-                  <X
-                    className="size-5"
-                    strokeWidth={1.7}
-                  />
-                ) : (
-                  <Menu
-                    className="size-5"
-                    strokeWidth={1.7}
-                  />
-                )}
+                <Menu
+                  className="size-5"
+                  strokeWidth={1.7}
+                />
               </button>
             </div>
           </Container>
@@ -608,9 +664,42 @@ export function Header() {
               duration: 0.65,
               ease: [0.76, 0, 0.24, 1],
             }}
-            className="fixed inset-0 z-[60] bg-[#111111] text-white lg:hidden"
+            ref={mobileMenuRef}
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menu"
+            data-lenis-prevent
+            className="fixed inset-0 z-[60] overflow-y-auto overscroll-contain bg-[#111111] text-white lg:hidden"
           >
-            <div className="flex min-h-[100svh] flex-col px-5 pb-6 pt-[96px]">
+            {/* Menu top bar: logo + close button, always on top of the menu */}
+            <div className="sticky top-0 z-10 bg-[#111111] px-5 sm:px-6">
+              <div className="flex h-[68px] items-center justify-between border-b border-white/15 md:h-[74px]">
+                <Link
+                  href="/"
+                  aria-label="XFIT home"
+                  onClick={() => setMenuOpen(false)}
+                  className="text-[20px] font-black leading-none tracking-[-0.065em]"
+                >
+                  XFIT
+                </Link>
+
+                <button
+                  ref={closeButtonRef}
+                  type="button"
+                  aria-label="Close menu"
+                  onClick={() => setMenuOpen(false)}
+                  className="grid size-11 place-items-center"
+                >
+                  <X
+                    className="size-5"
+                    strokeWidth={1.7}
+                  />
+                </button>
+              </div>
+            </div>
+
+            <div className="flex min-h-[calc(100svh-68px)] flex-col px-5 pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-6 sm:px-6">
               <nav
                 aria-label="Mobile navigation"
                 className="flex flex-1 flex-col justify-center"
